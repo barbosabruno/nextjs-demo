@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "fake-backend": "npx json-server server.json -p 3333 -w -d 2000",
     "build": "next build",
     "start": "next start"
   },
