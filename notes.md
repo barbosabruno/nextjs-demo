@@ -102,3 +102,31 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 ```
+
+## Dynamic import
+
+Importações dinâmicas podem ser realizadas para libs que são pouco utilizadas, dessa forma pode-se importar apenas quando o usuário for utilizar determinada funcionalidade, por exemplo:
+```typescript
+// path: src/lib/math.ts
+export default {
+  sum: (a: number, b: number) => a + b
+};
+```
+```tsx
+// path: src/pages/index.tsx
+export default function Home({ recommendedProducts }: IHomeProps) {
+
+  async function handleSum() {
+    const math = (await import('../lib/math')).default;
+
+    alert(math.sum(3, 5));
+  }
+
+  return (
+    <div>
+      ...
+      <button onClick={handleSum}>Sum</button>
+    </div>
+  )
+}
+```
